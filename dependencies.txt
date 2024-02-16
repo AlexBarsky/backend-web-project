@@ -1,7 +1,3 @@
-"dependencies": {
-	"global": "^4.4.0",
-}
-
 pnpm add prisma --save-dev
 prisma init
 prisma db pull
@@ -11,6 +7,8 @@ pnpm add class-validator
 pnpm add class-transformer
 
 pnpm add @faker-js/faker
+
+pnpm add global
 
 pnpm add argon2
 pnpm add @nestjs/config @nestjs/jwt
