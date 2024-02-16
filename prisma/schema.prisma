@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id         Int       @id @default(autoincrement())
+  created_at DateTime  @default(now())
+  updated_at DateTime
+  name       String    @unique
+  slug       String    @unique
+  product    product[]
+}
+
+model order {
+  id          Int             @id @default(autoincrement())
+  created_at  DateTime        @default(now())
+  updated_at  DateTime
+  status      EnumOrderStatus @default(PENDING)
+  user_id     Int
+  user        user            @relation(fields: [user_id], references: [id])
+  oreder_item oreder_item[]
+}
+
+model oreder_item {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime
+  quantity   Int
+  price      Decimal  @db.Decimal(8, 2)
+  order_id   Int?
+  product_id Int?
+  order      order?   @relation(fields: [order_id], references: [id])
+  product    product? @relation(fields: [product_id], references: [id])
+}
+
+model product {
+  id          Int           @id @default(autoincrement())
+  created_at  DateTime      @default(now())
+  updated_at  DateTime
+  name        String        @unique
+  slug        String        @unique
+  description String
+  price       Decimal       @db.Decimal(8, 2)
+  imgs        String[]
+  category_id Int?
+  user_id     Int?
+  oreder_item oreder_item[]
+  category    category?     @relation(fields: [category_id], references: [id])
+  user        user?         @relation(fields: [user_id], references: [id])
+  review      review[]
+}
+
+model review {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime
+  rating     Decimal  @db.Decimal(2, 1)
+  text       String
+  user_id    Int
+  product_id Int?
+  product    product? @relation(fields: [product_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id])
+}
+
+model user {
+  id          Int       @id @default(autoincrement())
+  created_at  DateTime  @default(now())
+  updated_at  DateTime
+  email       String    @unique
+  password    String
+  name        String    @unique
+  avatar_path String    @default("/uploads/default-avatar.png") @map("avatar-path")
+  phone       String    @default("")
+  order       order[]
+  product     product[]
+  review      review[]
+}
+
+enum EnumOrderStatus {
+  PENDING
+  PAYED
+  SHIPPED
+  DELIVERED
+}

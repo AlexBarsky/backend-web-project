@@ -1,0 +1,18 @@
+"dependencies": {
+	"global": "^4.4.0",
+}
+
+pnpm add prisma --save-dev
+prisma init
+prisma db pull
+prisma generate
+
+pnpm add class-validator
+pnpm add class-transformer
+
+pnpm add @faker-js/faker
+
+pnpm add argon2
+pnpm add @nestjs/config @nestjs/jwt
+pnpm add @nestjs/passport passport passport-jwt
+pnpm add @nestjs/mapped-types
