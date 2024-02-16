@@ -70,7 +70,7 @@ model review {
 model user {
   id          Int       @id @default(autoincrement())
   created_at  DateTime  @default(now())
-  updated_at  DateTime
+  updated_at  DateTime  @updatedAt
   email       String    @unique
   password    String
   name        String    @unique
