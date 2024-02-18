@@ -47,8 +47,6 @@ export class UserService {
 	async updateProfile(id: number, dto: UserDto) {
 		const isSameUser = await this.byIdOrEmail(dto.email);
 
-		if (!isSameUser) throw new NotFoundException('User not found by Email');
-
 		if (isSameUser && isSameUser.id !== id)
 			throw new BadRequestException('Email already in use');
 
