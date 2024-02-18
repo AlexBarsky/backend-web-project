@@ -10,7 +10,7 @@ datasource db {
 model category {
   id         Int       @id @default(autoincrement())
   created_at DateTime  @default(now())
-  updated_at DateTime
+  updated_at DateTime  @updatedAt
   name       String    @unique
   slug       String    @unique
   product    product[]
@@ -19,7 +19,7 @@ model category {
 model order {
   id          Int             @id @default(autoincrement())
   created_at  DateTime        @default(now())
-  updated_at  DateTime
+  updated_at  DateTime        @updatedAt
   status      EnumOrderStatus @default(PENDING)
   user_id     Int
   user        user            @relation(fields: [user_id], references: [id])
@@ -29,7 +29,7 @@ model order {
 model oreder_item {
   id         Int      @id @default(autoincrement())
   created_at DateTime @default(now())
-  updated_at DateTime
+  updated_at DateTime @updatedAt
   quantity   Int
   price      Decimal  @db.Decimal(8, 2)
   order_id   Int?
@@ -41,7 +41,7 @@ model oreder_item {
 model product {
   id          Int           @id @default(autoincrement())
   created_at  DateTime      @default(now())
-  updated_at  DateTime
+  updated_at  DateTime      @updatedAt
   name        String        @unique
   slug        String        @unique
   description String
@@ -58,7 +58,7 @@ model product {
 model review {
   id         Int      @id @default(autoincrement())
   created_at DateTime @default(now())
-  updated_at DateTime
+  updated_at DateTime @updatedAt
   rating     Decimal  @db.Decimal(2, 1)
   text       String
   user_id    Int
