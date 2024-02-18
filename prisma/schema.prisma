@@ -77,7 +77,7 @@ model user {
   avatar_path String    @default("/uploads/default-avatar.png") @map("avatar-path")
   phone       String    @default("")
   order       order[]
-  product     product[]
+  favorites   product[]
   review      review[]
 }
 
