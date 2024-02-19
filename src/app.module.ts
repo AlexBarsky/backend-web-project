@@ -8,6 +8,7 @@ import { PaginationModule } from './pagination/pagination.module';
 import { PrismaService } from './prisma.service';
 import { UserModule } from './user/user.module';
 import { ReviewModule } from './review/review.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
 	imports: [
@@ -17,6 +18,7 @@ import { ReviewModule } from './review/review.module';
 		CategoryModule,
 		PaginationModule,
 		ReviewModule,
+		ProductModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, PrismaService],
