@@ -17,16 +17,16 @@ model category {
 }
 
 model order {
-  id          Int             @id @default(autoincrement())
-  created_at  DateTime        @default(now())
-  updated_at  DateTime        @updatedAt
-  status      EnumOrderStatus @default(PENDING)
-  user_id     Int
-  user        user            @relation(fields: [user_id], references: [id])
-  oreder_item oreder_item[]
+  id         Int             @id @default(autoincrement())
+  created_at DateTime        @default(now())
+  updated_at DateTime        @updatedAt
+  status     EnumOrderStatus @default(PENDING)
+  user_id    Int
+  user       user            @relation(fields: [user_id], references: [id])
+  order_item order_item[]
 }
 
-model oreder_item {
+model order_item {
   id         Int      @id @default(autoincrement())
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -39,19 +39,19 @@ model oreder_item {
 }
 
 model product {
-  id          Int           @id @default(autoincrement())
-  created_at  DateTime      @default(now())
-  updated_at  DateTime      @updatedAt
-  name        String        @unique
-  slug        String        @unique
+  id          Int          @id @default(autoincrement())
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+  name        String       @unique
+  slug        String       @unique
   description String
-  price       Decimal       @db.Decimal(8, 2)
+  price       Decimal      @db.Decimal(8, 2)
   imgs        String[]
   category_id Int?
   user_id     Int?
-  oreder_item oreder_item[]
-  category    category?     @relation(fields: [category_id], references: [id])
-  user        user?         @relation(fields: [user_id], references: [id])
+  order_item  order_item[]
+  category    category?    @relation(fields: [category_id], references: [id])
+  user        user?        @relation(fields: [user_id], references: [id])
   review      review[]
 }
 
