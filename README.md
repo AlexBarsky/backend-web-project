@@ -71,3 +71,76 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Database Diagram
+```plantuml
+@startuml
+left to right direction
+
+class User {
+  __fields__
+  {field} -id
+  {field} +email
+  {field} #password
+  {field} ~role
+}
+
+class Basket {
+  __fields__
+  {field} -id
+  {field} ~user_id
+}
+
+User "1" -- "1" Basket
+
+class Basket_Item {
+  __fields__
+  {field} -id
+  {field} ~basket_id
+  {field} ~product_id
+  {field} +quantity
+}
+
+Basket "1" --{ "many" Basket_Item
+Basket_Item "\nmany\n" }-right- "\n1" Product
+
+class Product {
+  __fields__
+  {field} -id
+  {field} +name
+  {field} +price
+  {field} +rating
+  {field} ~img
+  {field} ~product_category_id
+}
+
+class Product_Category {
+  __fields__
+  {field} -id
+  {field} +name
+}
+
+Product "many" }--"1" Product_Category
+
+class Product_Info {
+  __fields__
+  {field} -id
+  {field} ~product_id
+  {field} +title
+  {field} +description
+}
+
+Product "1" -right-{ "\nmany" Product_Info
+
+class Rating {
+  __fields__
+  {field} -id
+  {field} ~user_id
+  {field} ~product_id
+}
+
+User "1" -right-{ "many" Rating
+Product "1" -up-{ "many" Rating
+
+@enduml
+```
