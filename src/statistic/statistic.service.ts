@@ -15,22 +15,22 @@ export class StatisticService {
 	 */
 	async getMain(userId: number) {
 		const user = await this.userService.byIdOrEmail(userId, {
-			order: {
+			orders: {
 				select: {
-					order_item: true,
+					order_items: true,
 				},
 			},
-			review: true,
+			reviews: true,
 		});
 
 		return [
 			{
 				name: 'Order',
-				value: user.order.length,
+				value: user.orders.length,
 			},
 			{
 				name: 'Reviews',
-				value: user.review.length,
+				value: user.reviews.length,
 			},
 			{
 				name: 'Favorites',

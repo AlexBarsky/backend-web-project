@@ -13,7 +13,7 @@ import { CurrentUser } from 'src/auth/decorators/user.decorator';
 import { ReviewDto } from './dto/review.dto';
 import { ReviewService } from './review.service';
 
-@Controller('review')
+@Controller('reviews')
 export class ReviewController {
 	constructor(private readonly reviewService: ReviewService) {}
 
@@ -33,5 +33,10 @@ export class ReviewController {
 		@Param('productId') productId: string,
 	) {
 		return this.reviewService.create(id, dto, +productId);
+	}
+
+	@Get('average-by-product/:productId')
+	async getAverageByProduct(@Param('productId') productId: string) {
+		return this.reviewService.getAverageValueByProductId(+productId);
 	}
 }

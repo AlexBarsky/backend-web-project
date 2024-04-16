@@ -28,7 +28,7 @@ const createProducts = async (quantity: number) => {
 						slug: faker.helpers.slugify(categoryName).toLowerCase(),
 					},
 				},
-				review: {
+				reviews: {
 					create: [
 						{
 							rating: faker.number.int({ min: 1, max: 5 }),

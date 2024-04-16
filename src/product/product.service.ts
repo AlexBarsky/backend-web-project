@@ -60,11 +60,13 @@ export class ProductService {
 			: {};
 
 		const { perPage, skip } = this.paginationService.getPagination(dto);
+
 		const products = await this.prisma.product.findMany({
 			where: prismaSearchTermFilter,
 			orderBy: prismaSort,
 			skip,
 			take: perPage,
+			select: returnProductObject,
 		});
 
 		return {

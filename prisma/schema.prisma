@@ -13,17 +13,17 @@ model category {
   updated_at DateTime  @updatedAt
   name       String    @unique
   slug       String    @unique
-  product    product[]
+  products   product[]
 }
 
 model order {
-  id         Int             @id @default(autoincrement())
-  created_at DateTime        @default(now())
-  updated_at DateTime        @updatedAt
-  status     EnumOrderStatus @default(PENDING)
-  user_id    Int
-  user       user            @relation(fields: [user_id], references: [id])
-  order_item order_item[]
+  id          Int             @id @default(autoincrement())
+  created_at  DateTime        @default(now())
+  updated_at  DateTime        @updatedAt
+  status      EnumOrderStatus @default(PENDING)
+  user_id     Int
+  user        user            @relation(fields: [user_id], references: [id])
+  order_items order_item[]
 }
 
 model order_item {
@@ -49,10 +49,10 @@ model product {
   imgs        String[]
   category_id Int?
   user_id     Int?
-  order_item  order_item[]
+  order_items order_item[]
   category    category?    @relation(fields: [category_id], references: [id])
   user        user?        @relation(fields: [user_id], references: [id])
-  review      review[]
+  reviews     review[]
 }
 
 model review {
@@ -76,9 +76,9 @@ model user {
   name        String    @unique
   avatar_path String    @default("/uploads/default-avatar.png") @map("avatar-path")
   phone       String    @default("")
-  order       order[]
+  orders      order[]
   favorites   product[]
-  review      review[]
+  reviews     review[]
 }
 
 enum EnumOrderStatus {

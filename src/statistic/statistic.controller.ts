@@ -3,7 +3,7 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/auth/decorators/user.decorator';
 import { StatisticService } from './statistic.service';
 
-@Controller('statistic')
+@Controller('statistics')
 export class StatisticController {
 	constructor(private readonly statisticService: StatisticService) {}
 
